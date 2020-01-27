@@ -50,6 +50,7 @@ cp -r ~/Downloads/Web_course_template-master/* .
 ## Adjust _config.yml
 
 ## Adjust default.html in themes>twitter 
+
 ## Push inital webpage to github
 
 - Enter `git add .`
@@ -57,5 +58,97 @@ cp -r ~/Downloads/Web_course_template-master/* .
 - Enter `git push origin gh-pages`
 - As soon as a gh-pages branch is pushed, your webpage is automatically visible. You can check this in the settings tab of your github repository:
 [https://github.com/statOmics/dockerPageExample/settings](https://github.com/statOmics/dockerPageExample/settings)
+
+# Setup online Rstudio via R/binder 
+## via mran
+### Add runtime.txt file
+When adding a runtime.txt file with an R timestamped version, R will be automatically installed and timestamped.  
+
+You need to have a runtime.txt file that is formatted like:
+
+r-version-<YYYY>-<MM>-<DD>
+
+where YYYY-MM-DD is a snapshot at MRAN that will be used for installing libraries. 
+
+Here we will add R 3.6. 
+
+```
+echo r-3.6-2020-01-01 >> runtime.txt
+```
+
+### Add install.R file with all scripts
+
+In install.R file you can add your the packages that you want to be installed. With the runtime.txt file your R version is time-stamped, but with the packages on CRAN you are not sure about the timestamp.
+ If your R version is compatible, the most recent package is installed. 
+ With the bioconductor docker your are sure that all your packages are timestamped!
+
+## Use bioconductor
+
+Make a docker file with name `Dockerfile` that has the following names. 
+You can replace the RELEASE with the names of the release that you would like to use. Here I will use bioconductor release 3.10. 
+
+```
+FROM bioconductor/bioconductor_docker:RELEASE_3_10
+
+## Run an install.R script, if it exists.
+RUN if [ -f install.R ]; then R --quiet -f install.R; fi
+```
+
+## Activate Binder
+
+- Go to mybinder webpage to activate binder link: [https://mybinder.org](https://mybinder.org)
+
+- Enter repository name 
+
+- Hit launch button
+
+## Binder link
+
+- You can now add a link to the binder instance on your webpage. Structure of link
+
+      - Copy the link of binder with repo name and repo branch: 
+`https://mybinder.org/v2/gh/statomics/dockerPageExample/master`  
+      - add `?urlpath=rstudio` to launch R studio. 
+
+- So full link with binder logo is included here: 
+`[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/statomics/dockerPageExample/master?urlpath=rstudio)`
+
+# Run scripts in binder: 
+
+- Launch binder and run your scripts in the binder Rstudio
+- go to gh-pages branch in local github repository
+```
+git checkout gh-pages
+```
+- Download webpage in gh-pages branch
+- Add output html files to webpage 
+- Push changes to github repo
+- You are all set
+
+# local Docker instance
+## Generate local docker instance
+You can install your own local docker by downloading the entire master branch or the branch with the docker from the github repository and invoking in a console:
+
+```
+docker build <path to downloaded github directory> -t myrepo_docker
+```
+
+This only has to be done once and generates a container that is always exactly alike.
+
+## Launch docker
+
+1. Open a terminal
+2. Launch the docker by typing the command
+
+```
+sudo docker run -p 8888:8888 myRepo_docker
+```
+
+You have to run the command as a super user (sudo) because normal users do not have the permission to launch docker on the PCs in the tutorial roam. The docker command launches docker. The run command enables you to launch a Docker. 
+
+The -p 8888:8888 command is used to listen to port 8888 of the docker and to pipe it to the port 8888 on the local machine. The will enable us to view the jupyter server in the Docker via a webbrowser.
+
+We can interact with the docker via a web browser.
+
 
 

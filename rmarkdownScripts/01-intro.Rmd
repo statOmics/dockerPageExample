@@ -713,6 +713,12 @@ text(7.5,.5,"DATA EXPLORATION &\nDESCRIPTIVE STATISTICS (2)",col="black",cex=1.2
 ```
 
 
+# Session Info
+
+```{r}
+sessionInfo()
+```
+
 ---
 
 # [Home](https://gtpb.github.io/PSLS20/) {-}
