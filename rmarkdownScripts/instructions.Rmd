@@ -47,7 +47,7 @@ output:
 ## Initialize Webpage
 - You can add a webpage from a directory in the master branch, but I prefer to do it in a separate gh-pages branch 
 
-- Type `git checkout --orphan gh-pages` to create a new gh-pages branch.
+- Type `git checkout --orphan gh-pages` to create a new gh-pages branch. This creates an branch that has no parent-child relations to the master branch: `orphan`. 
 
 - I typically delete everything and copy the website from another repository. I use the template on https://github.com/GTPB/Web_course_template. So I download the repository and unzip it in my download folder and copy it to the gh-pages branch that is now open in my locale git repository
 
@@ -116,7 +116,7 @@ In install.R file you can add your the packages that you want to be installed. W
 - So full link with binder logo is included here: 
 `[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/statomics/dockerPageExample/master?urlpath=rstudio)`
 
-# Run scripts in Binder instance: 
+# Run scripts in Binder instance
 
 - Launch binder and run your scripts in the binder Rstudio
 - go to gh-pages branch in local github repository
@@ -128,7 +128,7 @@ git checkout gh-pages
 - Push changes to github repo
 - You are all set
 
-# local Docker instance
+# Run code in a local Docker instance
 
 Generate local docker instance using the repo2docker builder
 1. Open a terminal
