@@ -1,0 +1,51 @@
+---
+title: "How to setup a git repository with code, webpage and R/Binder docker" 
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+output:
+    html_document:
+      code_download: true    
+      theme: cosmo
+      toc: true
+      toc_float: true
+      highlight: tango
+      number_sections: true
+---
+
+# Setup new repository
+## Setup repository on github webpage
+
+- Go to [GitHub](https://github.com)
+- Log in to your account.
+- Click the new repository button in the top-right. 
+- You have an option to initialize a repository with a README file. But I do that from the command line so I do not select this option. 
+- Just hit the "Create repository" button.
+
+## Setup github repository locally
+
+- Go to the directory where you save your github repostories
+- Copy the location from the clone/download button of the repository on the github webpage here it is `git clone git@github.com:statOmics/dockerPageExample.git`
+- Type `git clone git@github.com:statOmics/dockerPageExample.git`
+- Write some code.
+- Type `git add .` to add the files (see the typical use page).
+- Type `git commit -m "first commit"` to commit your your changes to github. The -m flag is used to add the message "first commit" to indicate the changes that you add
+- Type `git push origin` to add the files to your github account
+
+# Add webpage
+## Initialize Webpage
+- You can add a webpage from a directory in the master branch, but I prefer to do it in a separate gh-pages branch 
+
+- Type `git checkout --orphan gh-pages` to create a new gh-pages branch.
+
+- I typically delete everything and copy the website from another repository. I use the template on https://github.com/GTPB/Web_course_template. So I download the repository and unzip it in my download folder and copy it to the gh-pages branch that is now open in my locale git repository
+
+```
+cp -r ~/Downloads/Web_course_template-master/* .
+```
+
+## Adjust licence file
+
+## Adjust index file
+
+## Adjust _config.yml
+
