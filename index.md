@@ -32,6 +32,7 @@ schemadotorg:
 
 ### Content
 
+- Launch Rstudio in the cloud: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/statomics/dockerPageExample/master?urlpath=rstudio)
 - [example](rmarkdownScripts/01-intro.html)
 - [instructions to make repository](rmarkdownScripts/instructions.html)
 
