@@ -142,10 +142,14 @@ If you want to keep the docker fixed at a certain timestamp this can be added as
 
 ---
 
-# Preventing binder to be rebuild while developing
+# Useful details
+## Preventing binder to be rebuild while developing
 
 - If you change something to the master the binder docker is automatically rebuild. 
 - This can be prevented by making a separate binder branch e.g. with the name `binderR`
+
+## Copy files between branches
+
 - Files between the branches can be easily transferred
 - Copy a single file from the master branch to your binder branch.
   
@@ -166,6 +170,18 @@ Copy all files from directory rmarkdownScripts in master if you are currently in
 ```
 git checkout master rmarkdownScripts/**
 ```
+
+## Download files immediately from webpage for teaching purpose
+
+You can download via raw files via raw.githubusercontent.com
+
+```
+ap<-read_csv("https://raw.githubusercontent.com/GTPB/PSLS20/master/data/armpit.csv")
+```
+
+## Home button
+
+- Add home botton to menu. See at the end of this document. 
 
 ---
 
