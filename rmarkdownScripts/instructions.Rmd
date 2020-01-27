@@ -70,4 +70,72 @@ echo r-3.6-2019-04-12 >> runtime.txt
 
 ## Add install.R file with all scripts
 
+If your R version is time stamped, all packages that are installed from bioconductor will be timestamped. 
+
+In the install.R file we first install the biocManager package and then use the biocInstall function to install all other packages.
+
+```
+install.packages("BiocManager")
+BiocManager::install("tidyverse")
+BiocManager::install("NHANES")
+```
+
+## Activate Binder
+
+- Go to mybinder webpage to activate binder link: [https://mybinder.org](https://mybinder.org)
+
+- Enter repository name 
+
+- Hit launch button
+
+## Binder link
+
+- You can now add a link to the binder instance on your webpage. Structure of link
+
+      - Copy the link of binder with repo name and repo branch: 
+`https://mybinder.org/v2/gh/statomics/dockerPageExample/master`  
+      - add `?urlpath=rstudio` to launch R studio. 
+
+- So full link with binder logo is included here: 
+`[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/statomics/dockerPageExample/master?urlpath=rstudio)`
+
+# Run scripts in binder: 
+
+- Launch binder and run your scripts
+- Download webpages in local github repo 
+- push changes to github repo
+- Checkout to gh-pages branch
+
+```
+git checkout gh-pages
+```
+
+- Copy the markdown files and the html files from the directory rmarkdown files in the master
+
+```
+git checkout master rmarkdownScripts/**
+```
+
+Add html files to webpage and you are all set. 
+
+# local Docker instance
+## Generate local docker instance
+You can install your own local docker by downloading the entire master branch or the branch with the docker from the github repository and invoking in a console:
+
+```
+docker build <path to proteomicsShortCourse directory> -t myRepo_docker
+```
+
+This only has to be done once and generates a container that is always exactly alike.
+
+## Launch docker
+
+1. Open a terminal
+2. Launch the docker by typing the command
+
+```
+sudo docker run -p 8888:8888 myRepo_docker
+```
+
+
 
