@@ -501,7 +501,7 @@ res %>%
 res %>%
   ggplot(aes(x="",y=delta)) +
   geom_boxplot() +
-  geom_point(aes(x=0,y=c(mean(fem$cholLog)-mean(mal$cholLog)),color="pop. diff")) +
+  geom_point(aes(x=1,y=c(mean(fem$cholLog)-mean(mal$cholLog)),color="pop. diff")) +
   xlab("")
 ```
 
