@@ -49,6 +49,7 @@ cp -r ~/Downloads/Web_course_template-master/* .
 
 ## Adjust _config.yml
 
+## Adjust default.html in themes>twitter 
 ## Push inital webpage to github
 
 - Enter `git add .`
