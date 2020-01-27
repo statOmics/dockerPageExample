@@ -60,24 +60,38 @@ cp -r ~/Downloads/Web_course_template-master/* .
 [https://github.com/statOmics/dockerPageExample/settings](https://github.com/statOmics/dockerPageExample/settings)
 
 # Setup online Rstudio via R/binder 
-## Add runtime.txt file
-When adding a runtime.txt file with an R timestamped version, R will be automatically installed. 
+## via mran
+### Add runtime.txt file
+When adding a runtime.txt file with an R timestamped version, R will be automatically installed and timestamped.  
+
+You need to have a runtime.txt file that is formatted like:
+
+r-version-<YYYY>-<MM>-<DD>
+
+where YYYY-MM-DD is a snapshot at MRAN that will be used for installing libraries. 
+
 Here we will add R 3.6. 
 
 ```
-echo r-3.6-2019-04-12 >> runtime.txt
+echo r-3.6-2020-01-01 >> runtime.txt
 ```
 
-## Add install.R file with all scripts
+### Add install.R file with all scripts
 
-If your R version is time stamped, all packages that are installed from bioconductor will be timestamped. 
+In install.R file you can add your the packages that you want to be installed. With the runtime.txt file your R version is time-stamped, but with the packages on CRAN you are not sure about the timestamp.
+ If your R version is compatible, the most recent package is installed. 
+ With the bioconductor docker your are sure that all your packages are timestamped!
 
-In the install.R file we first install the biocManager package and then use the biocInstall function to install all other packages.
+## Use bioconductor
+
+Make a docker file with name `Dockerfile` that has the following names. 
+You can replace the RELEASE with the names of the release that you would like to use. Here I will use bioconductor release 3.10. 
 
 ```
-install.packages("BiocManager")
-BiocManager::install("tidyverse")
-BiocManager::install("NHANES")
+FROM bioconductor/bioconductor_docker:RELEASE_3_10
+
+## Run an install.R script, if it exists.
+RUN if [ -f install.R ]; then R --quiet -f install.R; fi
 ```
 
 ## Activate Binder
@@ -123,7 +137,7 @@ Add html files to webpage and you are all set.
 You can install your own local docker by downloading the entire master branch or the branch with the docker from the github repository and invoking in a console:
 
 ```
-docker build <path to proteomicsShortCourse directory> -t myRepo_docker
+docker build <path to downloaded github directory> -t myrepo_docker
 ```
 
 This only has to be done once and generates a container that is always exactly alike.
@@ -136,6 +150,12 @@ This only has to be done once and generates a container that is always exactly a
 ```
 sudo docker run -p 8888:8888 myRepo_docker
 ```
+
+You have to run the command as a super user (sudo) because normal users do not have the permission to launch docker on the PCs in the tutorial roam. The docker command launches docker. The run command enables you to launch a Docker. 
+
+The -p 8888:8888 command is used to listen to port 8888 of the docker and to pipe it to the port 8888 on the local machine. The will enable us to view the jupyter server in the Docker via a webbrowser.
+
+We can interact with the docker via a web browser.
 
 
 

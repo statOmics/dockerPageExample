@@ -1,1 +1,2 @@
-BiocManager::install("NHANES")
+install.packages("tidyverse")
+install.packages("NHANES")
