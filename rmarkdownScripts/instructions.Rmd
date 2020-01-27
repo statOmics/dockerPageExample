@@ -31,4 +31,31 @@ output:
 - Type `git commit -m "first commit"` to commit your your changes to github. The -m flag is used to add the message "first commit" to indicate the changes that you add
 - Type `git push origin` to add the files to your github account
 
-##
+# Add webpage
+## Initialize Webpage
+- You can add a webpage from a directory in the master branch, but I prefer to do it in a separate gh-pages branch 
+
+- Type `git checkout --orphan gh-pages` to create a new gh-pages branch.
+
+- I typically delete everything and copy the website from another repository. I use the template on https://github.com/GTPB/Web_course_template. So I download the repository and unzip it in my download folder and copy it to the gh-pages branch that is now open in my locale git repository
+
+```
+cp -r ~/Downloads/Web_course_template-master/* .
+```
+
+## Adjust licence file
+
+## Adjust index file
+
+## Adjust _config.yml
+
+## Adjust default.html in themes>twitter 
+## Push inital webpage to github
+
+- Enter `git add .`
+- Enter `git commit -m "gh-pages initialized"`
+- Enter `git push origin gh-pages`
+- As soon as a gh-pages branch is pushed, your webpage is automatically visible. You can check this in the settings tab of your github repository:
+[https://github.com/statOmics/dockerPageExample/settings](https://github.com/statOmics/dockerPageExample/settings)
+
+
