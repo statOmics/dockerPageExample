@@ -12,6 +12,14 @@ output:
       number_sections: true
 ---
 
+# Functionalities
+
+- Develop code and keep track of all changes
+- Provide your project with a webpage
+- Provide a docker image that allows you to ensure your analyses are fully reproducible
+
+--- 
+
 # Setup new repository
 ## Setup repository on github webpage
 
@@ -20,6 +28,8 @@ output:
 - Click the new repository button in the top-right. 
 - You have an option to initialize a repository with a README file. But I do that from the command line so I do not select this option. 
 - Just hit the "Create repository" button.
+
+---
 
 ## Setup github repository locally
 
@@ -30,6 +40,8 @@ output:
 - Type `git add .` to add the files (see the typical use page).
 - Type `git commit -m "first commit"` to commit your your changes to github. The -m flag is used to add the message "first commit" to indicate the changes that you add
 - Type `git push origin` to add the files to your github account
+
+---
 
 # Add webpage
 ## Initialize Webpage
@@ -42,6 +54,8 @@ output:
 ```
 cp -r ~/Downloads/Web_course_template-master/* .
 ```
+
+---
 
 ## Adjust licence file
 
@@ -59,9 +73,10 @@ cp -r ~/Downloads/Web_course_template-master/* .
 - As soon as a gh-pages branch is pushed, your webpage is automatically visible. You can check this in the settings tab of your github repository:
 [https://github.com/statOmics/dockerPageExample/settings](https://github.com/statOmics/dockerPageExample/settings)
 
+---
+
 # Setup online Rstudio via R/binder 
-## via mran
-### Add runtime.txt file
+## Add runtime.txt file
 When adding a runtime.txt file with an R timestamped version, R will be automatically installed and timestamped.  
 
 You need to have a runtime.txt file that is formatted like:
@@ -76,23 +91,11 @@ Here we will add R 3.6.
 echo r-3.6-2020-01-01 >> runtime.txt
 ```
 
-### Add install.R file with all scripts
+## Add install.R file with all scripts
 
 In install.R file you can add your the packages that you want to be installed. With the runtime.txt file your R version is time-stamped, but with the packages on CRAN you are not sure about the timestamp.
  If your R version is compatible, the most recent package is installed. 
  With the bioconductor docker your are sure that all your packages are timestamped!
-
-## Use bioconductor
-
-Make a docker file with name `Dockerfile` that has the following names. 
-You can replace the RELEASE with the names of the release that you would like to use. Here I will use bioconductor release 3.10. 
-
-```
-FROM bioconductor/bioconductor_docker:RELEASE_3_10
-
-## Run an install.R script, if it exists.
-RUN if [ -f install.R ]; then R --quiet -f install.R; fi
-```
 
 ## Activate Binder
 
@@ -113,7 +116,7 @@ RUN if [ -f install.R ]; then R --quiet -f install.R; fi
 - So full link with binder logo is included here: 
 `[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/statomics/dockerPageExample/master?urlpath=rstudio)`
 
-# Run scripts in binder: 
+# Run scripts in Binder instance: 
 
 - Launch binder and run your scripts in the binder Rstudio
 - go to gh-pages branch in local github repository
@@ -126,29 +129,44 @@ git checkout gh-pages
 - You are all set
 
 # local Docker instance
-## Generate local docker instance
-You can install your own local docker by downloading the entire master branch or the branch with the docker from the github repository and invoking in a console:
 
-```
-docker build <path to downloaded github directory> -t myrepo_docker
-```
-
-This only has to be done once and generates a container that is always exactly alike.
-
-## Launch docker
-
+Generate local docker instance using the repo2docker builder
 1. Open a terminal
-2. Launch the docker by typing the command
-
+2. Enter 
 ```
-sudo docker run -p 8888:8888 myRepo_docker
+repo2docker <link to repository>
+```
+3. Local docker is build and can be launched by copying jupyter link in your browser
+
+If you want to keep the docker fixed at a certain timestamp this can be added as an option to the repo2docker. Then the docker will not rebuild if the developer has updated the repo. 
+
+---
+
+# Preventing binder to be rebuild while developing
+
+- If you change something to the master the binder docker is automatically rebuild. 
+- This can be prevented by making a separate binder branch e.g. with the name `binderR`
+- Files between the branches can be easily transferred
+- Copy a single file from the master branch to your binder branch.
+  
+    - First go the the `binderR` branch
+    
+```
+git checkout binderR
+```
+    
+    - Copy your file from the master via
+    
+```
+git checkout master rmarkdownScripts/01-intro.Rmd 
+```
+    
+Copy all files from directory rmarkdownScripts in master if you are currently in binderR branch:
+    
+```
+git checkout master rmarkdownScripts/**
 ```
 
-You have to run the command as a super user (sudo) because normal users do not have the permission to launch docker on the PCs in the tutorial roam. The docker command launches docker. The run command enables you to launch a Docker. 
+---
 
-The -p 8888:8888 command is used to listen to port 8888 of the docker and to pipe it to the port 8888 on the local machine. The will enable us to view the jupyter server in the Docker via a webbrowser.
-
-We can interact with the docker via a web browser.
-
-
-
+# [Home](https://statomics.github.io/dockerPageExample/) {-}

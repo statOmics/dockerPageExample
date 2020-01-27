@@ -1,5 +1,5 @@
 ---
-title: "1. Introduction: Why do we need statistics" 
+title: "1. Introduction: Why do we need statistics"
 author: "Lieven Clement"
 date: "statOmics, Ghent University (https://statomics.github.io)"
 output:
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
 library(tidyverse)
 ```
 
-#Smelly armpit example
+# Smelly armpit example
 
 - Smelly armpits are not caused by sweat itself. The smell is caused by specific micro-organisms belonging to the group of *Corynebacterium spp.* that metabolise sweat.
 Another group of abundant bacteria are the *Staphylococcus spp.*, these bacteria do not metabolise sweat in smelly compounds.
@@ -55,15 +55,15 @@ ap
 
 ## Data Exploration and Descriptive Statistics
 
-- Data exploration is extremely important to get insight in the data. 
-- It is often underrated and overlooked. 
+- Data exploration is extremely important to get insight in the data.
+- It is often underrated and overlooked.
 
 ### Descriptive statistics
 We first summarize the data and calculate the mean, standard deviation, number of observations and standard error and store the result in an object apRelSum via 'apRelSum<-`
 
 1. We pipe the `ap` dataframe to the group_by function to group the data by treatment trt `group_by(trt)`
-2. We pipe the result to the `summarize_at` function to summarize the "rel" variable and calculate the mean, standard deviation and the number of observations 
-3. We pipe the result to the `mutate` function to make a new variable in the data frame `se` for which we calculate the standard error 
+2. We pipe the result to the `summarize_at` function to summarize the "rel" variable and calculate the mean, standard deviation and the number of observations
+3. We pipe the result to the `mutate` function to make a new variable in the data frame `se` for which we calculate the standard error
 
 
 ```{r}
@@ -81,7 +81,7 @@ apRelSum
 ---
 
 ### Plots
-We will use ggplot2 to make our plots. 
+We will use ggplot2 to make our plots.
 With the ggplot2 library we can easily build plots by adding layers.
 
 #### barplot
@@ -91,9 +91,9 @@ With the ggplot2 library we can easily build plots by adding layers.
 2. We make a barplot based on this data using the `geom_bar` function. The statistic is `stat="identity"` because the bar height should be equal the value for the mean of the relative abundance.
 
 ```{r}
-apRelSum%>% 
+apRelSum%>%
   ggplot(aes(x=trt,y=mean)) +
-  geom_bar(stat="identity") 
+  geom_bar(stat="identity")
 ```
 
 - Is this plot informative??
@@ -101,12 +101,12 @@ apRelSum%>%
 ---
 
 We will now add standard errors to the plot
-using `geom_errorbar` function and specify the minimum and maximum value for of the error bar, the width command is used to set the width of the error bar smaller than the width of the bar. 
+using `geom_errorbar` function and specify the minimum and maximum value for of the error bar, the width command is used to set the width of the error bar smaller than the width of the bar.
 
 ```{r}
-apRelSum%>% 
+apRelSum%>%
   ggplot(aes(x=trt,y=mean)) +
-  geom_bar(stat="identity") + 
+  geom_bar(stat="identity") +
   geom_errorbar(aes(ymin=mean-se,ymax=mean+se),width=.2)
 ```
 
@@ -120,10 +120,10 @@ I consider barplots to be bad plots
 
 - They are not informative
 - They just visualize a two point summary of the data. It is better to do this in a table
-- They use a lot of space (e.g. from zero up to the minimum relative abundance) where no data are present. 
+- They use a lot of space (e.g. from zero up to the minimum relative abundance) where no data are present.
 
 It is better to get a view on the distribution of the data. We can use a boxplot for this purpose.
-We first explain what a boxplot. 
+We first explain what a boxplot.
 
 ---
 
@@ -143,10 +143,10 @@ We will now make a boxplot for the ap data
 1. We pipe the `ap` dataframe to the ggplot command
 2. We select the data with the command `ggplot(aes(x=trt,y=rel))`
 3. We add a boxplot with the command `geom_boxplot()`
-    
+
 ```{r}
 ap %>%  
-  ggplot(aes(x=trt,y=rel)) + 
+  ggplot(aes(x=trt,y=rel)) +
   geom_boxplot()
 ```
 
@@ -197,13 +197,13 @@ ap2$rel<-rnorm(20,mean=hlp$fit-20,sd=sigma(hlp)*2)
 ap %>%  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot(outlier.shape=NA) +
-  geom_point(position="jitter") + 
+  geom_point(position="jitter") +
   ylim(0,100)
 
 ap2 %>%  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot(outlier.shape=NA) +
-  geom_point(position="jitter") + 
+  geom_point(position="jitter") +
   ylim(0,100)
 ```
 
@@ -262,7 +262,7 @@ glimpse(NHANES)
 
 Suppose that we are interested in assessing the difference in direct cholesterol levels between males and females older than 25 years.
 
-1. We pipe the dataset to the function `filter` to filter the data according to age. 
+1. We pipe the dataset to the function `filter` to filter the data according to age.
 2. We plot the direct cholesterol levels.
     - We select the data with the command `ggplot(aes(x=DirectChol))`
     - We add a histogram with the command `geom_histogram()`
@@ -311,11 +311,11 @@ nhanesSub<- NHANES%>%
 
 ---
 
-We will calculate the summary statistics for the cholLog variable for males and females in the large dataset. 
+We will calculate the summary statistics for the cholLog variable for males and females in the large dataset.
 So we group by Gender
 
 ```{r}
-cholLogSum<- nhanesSub %>% 
+cholLogSum<- nhanesSub %>%
   group_by(Gender) %>%
    summarize_at("cholLog",
                list(mean=~mean(.,na.rm=TRUE),
@@ -354,7 +354,7 @@ samp %>%
   facet_grid(Gender~.) +
   xlab("Direct cholesterol (log2)")
 
-samp%>% 
+samp%>%
   ggplot(aes(x=Gender,y=cholLog)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
@@ -364,7 +364,7 @@ samp%>%
 
 We summarize the data
 ```{r}
-samp %>% 
+samp %>%
   group_by(Gender) %>%
    summarize_at("cholLog",
                list(mean=~mean(.,na.rm=TRUE),
@@ -373,7 +373,7 @@ samp %>%
   mutate(se=sd/sqrt(n))
 ```
 
-Note that the sample mean is different from that of the large experiment ("population") we sampled from. 
+Note that the sample mean is different from that of the large experiment ("population") we sampled from.
 
 We test for the difference between Males and females
 
@@ -399,12 +399,12 @@ samp2%>%
   facet_grid(Gender~.) +
   xlab("Direct cholesterol (log)")
 
-samp2%>% 
+samp2%>%
   ggplot(aes(x=Gender,y=cholLog)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
 
-samp2 %>% 
+samp2 %>%
   group_by(Gender) %>%
    summarize_at("cholLog",
                list(mean=~mean(.,na.rm=TRUE),
@@ -431,13 +431,13 @@ samp3%>%
   facet_grid(Gender~.) +
   xlab("Direct cholesterol (log)")
 
-samp3%>% 
+samp3%>%
   ggplot(aes(x=Gender,y=cholLog)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
 
 
-samp3 %>% 
+samp3 %>%
   group_by(Gender) %>%
    summarize_at("cholLog",
                list(mean=~mean(.,na.rm=TRUE),
@@ -491,14 +491,14 @@ sum(res[,2]<0.05&res[,1]<0)
 
 res<-res %>% as.data.frame
 names(res) <- c("delta","pvalue")
-res %>% 
-  ggplot(aes(x=delta,y=-log10(pvalue),color=pvalue<0.05)) + 
-  geom_point() + 
+res %>%
+  ggplot(aes(x=delta,y=-log10(pvalue),color=pvalue<0.05)) +
+  geom_point() +
   xlab("Average cholesterol difference") +
   ylab("- log10(pvalue)") +
   scale_color_manual(values=c("black","red"))
 
-res %>% 
+res %>%
   ggplot(aes(y=delta)) +
   geom_boxplot() +
   geom_point(aes(x=0,y=c(mean(fem$cholLog)-mean(mal$cholLog)),color="pop. diff")) +
@@ -645,7 +645,7 @@ text(0.5,-0.3,"Statistical\nInference",cex=2,col="darkred")
 - We have seen that
     - it is important to carefully specify the scope of the study before the experiment,
     - the sample size matters,
-    - we should be aware of confounding, and 
+    - we should be aware of confounding, and
     - a proper control is required.
 
 $\rightarrow$ Good experimental design is crucial!
@@ -721,4 +721,4 @@ sessionInfo()
 
 ---
 
-# [Home](https://gtpb.github.io/PSLS20/) {-}
+# [Home](https://statomics.github.io/dockerPageExample/) {-}
