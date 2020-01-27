@@ -30,19 +30,10 @@ schemadotorg:
   url: "https://statistics.github.io/dockerPageExample/"
 ---
 
-## Course Description
+### Content
 
-## Target Audience
-
-
-## Detailed Program
-
-
----
-
-### Learning objectives
-
-### Instructors
+- [example](rmarkdownScripts/01-intro.html)
+- [instructions to make repository](rmarkdownScripts/instructions.html)
 
 ---
 

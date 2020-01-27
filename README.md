@@ -13,42 +13,8 @@
 2. When ready, copy the contents in the master branch to the gh-pages branch.
 3. Make sure everything works properly and do your final corrections.
 
-<!---
-
-## COURSE_SHORT - COURSE_EXTENDED_NAME
-
-###  Instituto Gulbenkian de Ciência (IGC) - Oeiras, Portugal - MONTH DAY<sup>th</sup> - MONTH DAY<sup>th</sup> YEAR
-Go to the [course oficial website](http://gtpb.igc.gulbenkian.pt/bicourses/YEAR/COURSE_SHORT/)
-
----
-
-#### Co-Authorship
-
-The following co-authors contributed to the development of the training material.
-
-* [CO-AUTHOR_1](https://github.com/CO-AUTHOR_1)
-* [CO-AUTHOR_2](https://github.com/CO-AUTHOR_2)
-
-#### Course Webpage
-This is the link to the [course webpage](http://gtpb.igc.gulbenkian.pt/bicourses/YEAR/COURSE_SHORT/), for further information about the course.
-
---->
-
-#### Code of Conduct
-Please read the [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for details on contributing and reusing the training material.
-
 #### License
 This project is licensed under CC-BY 4.0 - see the [License.md](License.md) for details.
-
----
-
-#### Host & Co-Sponsor
-
-<a href="http://www.igc.gulbenkian.pt/"><img src="./assets/readme_img/Logo_IGC_2014.png" alt="Instituto Gulbenkian de Ciência" width="250px"></a>
-
-#### Contributors
-
-<a href="https://biodata.pt/"><img src="./assets/readme_img/BIoData_and_co-financiadores.png" alt="Instituto Gulbenkian de Ciência" width="500px"></a>
 
 ---
 
