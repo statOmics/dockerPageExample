@@ -50,6 +50,7 @@ cp -r ~/Downloads/Web_course_template-master/* .
 ## Adjust _config.yml
 
 ## Adjust default.html in themes>twitter 
+
 ## Push inital webpage to github
 
 - Enter `git add .`
@@ -57,5 +58,16 @@ cp -r ~/Downloads/Web_course_template-master/* .
 - Enter `git push origin gh-pages`
 - As soon as a gh-pages branch is pushed, your webpage is automatically visible. You can check this in the settings tab of your github repository:
 [https://github.com/statOmics/dockerPageExample/settings](https://github.com/statOmics/dockerPageExample/settings)
+
+# Setup online Rstudio via R/binder 
+## Add runtime.txt file
+When adding a runtime.txt file with an R timestamped version, R will be automatically installed. 
+Here we will add R 3.6. 
+
+```
+echo r-3.6-2019-04-12 >> runtime.txt
+```
+
+## Add install.R file with all scripts
 
 
