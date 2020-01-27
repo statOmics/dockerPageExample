@@ -49,3 +49,12 @@ cp -r ~/Downloads/Web_course_template-master/* .
 
 ## Adjust _config.yml
 
+## Push inital webpage to github
+
+- Enter `git add .`
+- Enter `git commit -m "gh-pages initialized"`
+- Enter `git push origin gh-pages`
+- As soon as a gh-pages branch is pushed, your webpage is automatically visible. You can check this in the settings tab of your github repository:
+[https://github.com/statOmics/dockerPageExample/settings](https://github.com/statOmics/dockerPageExample/settings)
+
+
