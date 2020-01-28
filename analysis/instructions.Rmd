@@ -124,7 +124,7 @@ In install.R file you can add your the packages that you want to be installed. W
 git checkout gh-pages
 ```
 - Download webpage in gh-pages branch
-- Add output html files to webpage 
+- Add link to output html files in index.md file
 - Push changes to github repo
 - You are all set
 
@@ -162,13 +162,13 @@ git checkout binderR
     - Copy your file from the master via
     
 ```
-git checkout master rmarkdownScripts/01-intro.Rmd 
+git checkout master analysis/01-intro.Rmd 
 ```
     
-Copy all files from directory rmarkdownScripts in master if you are currently in binderR branch:
+Copy all files from directory analysis in master if you are currently in binderR branch:
     
 ```
-git checkout master rmarkdownScripts/**
+git checkout master analysis/**
 ```
 
 ## Download files immediately from webpage for teaching purpose
