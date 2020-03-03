@@ -1,5 +1,5 @@
 ---
-title: "How to setup a git repository with code, webpage and R/Binder docker" 
+title: "How to setup a git repository with code, webpage and R/Binder docker"
 author: "Lieven Clement"
 date: "statOmics, Ghent University (https://statomics.github.io)"
 output:
@@ -18,15 +18,15 @@ output:
 - Provide your project with a webpage
 - Provide a docker image that allows you to ensure your analyses are fully reproducible
 
---- 
+---
 
 # Setup new repository
 ## Setup repository on github webpage
 
 - Go to [GitHub](https://github.com)
 - Log in to your account.
-- Click the new repository button in the top-right. 
-- You have an option to initialize a repository with a README file. But I do that from the command line so I do not select this option. 
+- Click the new repository button in the top-right.
+- You have an option to initialize a repository with a README file. But I do that from the command line so I do not select this option.
 - Just hit the "Create repository" button.
 
 ---
@@ -43,7 +43,7 @@ output:
 
 ---
 
-# Setup online Rstudio via R/binder 
+# Setup online Rstudio via R/binder
 ## Add runtime.txt file
 When adding a runtime.txt file with an R timestamped version, R will be automatically installed and timestamped.  
 
@@ -51,46 +51,55 @@ You need to have a runtime.txt file that is formatted like:
 
 r-version-<YYYY>-<MM>-<DD>
 
-where YYYY-MM-DD is a snapshot at MRAN that will be used for installing libraries. 
+where YYYY-MM-DD is a snapshot at MRAN that will be used for installing libraries.
 
-Here we will add R 3.6. 
+Here we will add R 3.6.
 
 ```
 echo r-3.6-2020-01-01 >> runtime.txt
 ```
 
+
 ## Add install.R file with all scripts
 
 In install.R file you can add your the packages that you want to be installed. With the runtime.txt file your R version is time-stamped, but with the packages on CRAN you are not sure about the timestamp.
- If your R version is compatible, the most recent package is installed. 
+ If your R version is compatible, the most recent package is installed.
  With the bioconductor docker your are sure that all your packages are timestamped!
+
+
+
+## For other environments e.g. python, julia, etc
+
+Info on configuration files can be found on
+https://repo2docker.readthedocs.io/en/latest/config_files.html
+
 
 ## Activate Binder
 
 - Go to mybinder webpage to activate binder link: [https://mybinder.org](https://mybinder.org)
 
-- Enter repository name 
+- Enter repository name
 
 - Hit launch button
 
-## Binder link 
+## Binder link
 
 - You can now add a link to the binder instance on your webpage. Structure of link
 
-      - Copy the link of binder with repo name and repo branch: 
+      - Copy the link of binder with repo name and repo branch:
 `https://mybinder.org/v2/gh/statomics/dockerPageExample/master`  
-      - add `?urlpath=rstudio` to launch R studio. 
+      - add `?urlpath=rstudio` to launch R studio.
 
-- So full link with binder logo is included here: 
+- So full link with binder logo is included here:
 `[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/statomics/dockerPageExample/master?urlpath=rstudio)`
 
 ---
 
 # Add webpage
 ## Initialize Webpage
-- You can add a webpage from a directory in the master branch, but I prefer to do it in a separate gh-pages branch 
+- You can add a webpage from a directory in the master branch, but I prefer to do it in a separate gh-pages branch
 
-- Type `git checkout --orphan gh-pages` to create a new gh-pages branch. This creates an branch that has no parent-child relations to the master branch: `orphan`. 
+- Type `git checkout --orphan gh-pages` to create a new gh-pages branch. This creates an branch that has no parent-child relations to the master branch: `orphan`.
 
 - I typically delete everything and copy the website from another repository. I use the template on https://github.com/GTPB/Web_course_template. So I download the repository and unzip it in my download folder and copy it to the gh-pages branch that is now open in my locale git repository
 
@@ -106,7 +115,7 @@ cp -r ~/Downloads/Web_course_template-master/* .
 
 ## Adjust _config.yml
 
-## Adjust default.html in themes>twitter 
+## Adjust default.html in themes>twitter
 
 ## Push inital webpage to github
 
@@ -128,41 +137,41 @@ cp -r ~/Downloads/Web_course_template-master/* .
 
 Generate local docker instance using the repo2docker builder
 1. Open a terminal
-2. Enter 
+2. Enter
 ```
 repo2docker <link to repository>
 ```
 3. Local docker is build and can be launched by copying jupyter link in your browser
 
-If you want to keep the docker fixed at a certain timestamp this can be added as an option to the repo2docker. Then the docker will not rebuild if the developer has updated the repo. 
+If you want to keep the docker fixed at a certain timestamp this can be added as an option to the repo2docker. Then the docker will not rebuild if the developer has updated the repo.
 
 ---
 
 # Useful details
 ## Preventing binder to be rebuild while developing
 
-- If you change something to the master the binder docker is automatically rebuild. 
+- If you change something to the master the binder docker is automatically rebuild.
 - This can be prevented by making a separate binder branch e.g. with the name `binderR`
 
 ## Copy files between branches
 
 - Files between the branches can be easily transferred
 - Copy a single file from the master branch to your binder branch.
-  
+
     - First go the the `binderR` branch
-    
+
 ```
 git checkout binderR
 ```
-    
+
     - Copy your file from the master via
-    
+
 ```
-git checkout master analysis/01-intro.Rmd 
+git checkout master analysis/01-intro.Rmd
 ```
-    
+
 Copy all files from directory analysis in master if you are currently in binderR branch:
-    
+
 ```
 git checkout master analysis/**
 ```
@@ -177,7 +186,7 @@ ap<-read_csv("https://raw.githubusercontent.com/GTPB/PSLS20/master/data/armpit.c
 
 ## Home button
 
-- Add home botton to menu. See at the end of this document. 
+- Add home botton to menu. See at the end of this document.
 
 ---
 
